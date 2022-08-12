@@ -24,12 +24,11 @@ class AppTheme {
     backgroundColor: Color(0xfff6f6f6),
     scaffoldBackgroundColor: Color(0xfff6f6f6),
     appBarTheme: AppBarTheme(
-      textTheme: lightAppBarTextTheme,
       actionsIconTheme: IconThemeData(
         color: Color(0xff495057),
       ),
       color: Color(0xffffffff),
-      iconTheme: IconThemeData(color: Color(0xff495057), size: 24),
+      iconTheme: IconThemeData(color: Color(0xff495057), size: 24), toolbarTextStyle: lightAppBarTextTheme.bodyText2, titleTextStyle: lightAppBarTextTheme.headline6,
     ),
     navigationRailTheme: NavigationRailThemeData(
         selectedIconTheme:
@@ -43,9 +42,7 @@ class AppTheme {
     colorScheme: ColorScheme.light(
         primary: Color(0xff3d63ff),
         onPrimary: Colors.white,
-        primaryVariant: Color(0xff0055ff),
         secondary: Color(0xff495057),
-        secondaryVariant: Color(0xff3cd278),
         onSecondary: Colors.white,
         surface: Color(0xffe2e7f1),
         background: Color(0xfff3f4f7),
@@ -131,9 +128,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(backgroundColor: Color(0xff1b1b1b)),
       colorScheme: ColorScheme.dark(
         primary: Color(0xff3d63ff),
-        primaryVariant: Color(0xff3d63ff),
         secondary: Color(0xff00cc77),
-        secondaryVariant: Color(0xff00cc77),
         background: Color(0xff1b1b1b),
         onPrimary: Colors.white,
         onBackground: Colors.white,
