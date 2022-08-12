@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_show/config/defalut_env.dart';
 
+import '../common/config/defalut_env.dart';
 import '../modules/dynamic_layout/config/app_config.dart';
 
 class AppModel with ChangeNotifier{

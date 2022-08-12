@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:onion_flutter/global/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'app_theme.dart';
 
 // 如果标识符以下划线（_）开头，则它相对于库是私有的
 class ThemeNotifier extends ChangeNotifier{

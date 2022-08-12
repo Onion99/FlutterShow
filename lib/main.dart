@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_show/routes/overlay_control_delegate.dart';
 import 'package:flutter_show/routes/route_observer.dart';
@@ -12,8 +13,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
+import 'common/config/ui_config.dart';
 import 'common/theme/light_theme.dart';
-import 'config/ui_config.dart';
 import 'generated/l10n.dart';
 import 'inject/injection.dart';
 import 'modules/dynamic_layout/config/app_config.dart';
@@ -25,16 +26,20 @@ void main() {
   printLog('[main] ===== START main.dart =======');
   /// 提前初始化App与Widget框架的绑定,避免一些白屏问题
   WidgetsFlutterBinding.ensureInitialized();
+
+  if(Platform.isAndroid || Platform.isIOS){
+    // 设置安卓状态栏和导航栏颜色
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.black
+    ));
+  }
   // 全局捕获异常
   runZonedGuarded(() async {
     // 依赖注入初始化
     await DependencyInjection.initInject();
 
-    // 设置安卓状态栏和导航栏颜色
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.black
-    ));
+
 
     // 固定屏幕方向
     unawaited(SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
@@ -55,6 +60,7 @@ void main() {
 }
 
 class App extends StatefulWidget {
+
   final String  languageCode;
 
   App(this.languageCode);

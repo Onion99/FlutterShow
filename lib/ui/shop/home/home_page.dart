@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onion_flutter/config/ui_config.dart';
-import 'package:onion_flutter/global/app_theme.dart';
+
+import '../../../common/config/ui_config.dart';
+import '../../../common/global/app_theme.dart';
 
 class Homepage extends StatefulWidget{
 
