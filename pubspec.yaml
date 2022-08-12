@@ -32,7 +32,18 @@ dependencies:
   # UI资源
   cupertino_icons: ^1.0.2
   google_fonts: ^2.0.0
+  # image
+  flutter_svg: 1.1.2
+  extended_image: 6.2.1
+  # SPLASH SCREEN, ONBOARD
+  lottie: 1.4.0
+  rive: 0.9.1
 
+  flare_flutter:
+    git:
+      url: https://github.com/inspireui/Flare-Flutter.git
+      ref: fd4bcba22aae4c028286e453deeb78f3311e689a
+      path: flare_flutter
 flutter:
   uses-material-design: true
   assets:

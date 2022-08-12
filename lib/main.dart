@@ -139,6 +139,9 @@ class AppState extends State<App> with WidgetsBindingObserver{
                       themeMode: themeMode,
                     ),
                     themeMode: themeMode,
+                    home: const Scaffold(
+
+                    ),
                   ),
                 )
             );
