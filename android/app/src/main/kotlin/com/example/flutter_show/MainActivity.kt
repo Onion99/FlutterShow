@@ -1,4 +1,4 @@
-package com.onion.flutter.onion_flutter
+package com.example.flutter_show
 
 import io.flutter.embedding.android.FlutterActivity
 

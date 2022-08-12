@@ -1,18 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter_show/routes/overlay_control_delegate.dart';
+import 'package:flutter_show/routes/route_observer.dart';
+import 'package:flutter_show/services/locale_service.dart';
+import 'package:flutter_show/util/logs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:onion_flutter/inject/injection.dart';
-import 'package:onion_flutter/modules/dynamic_layout/config/app_setting.dart';
-import 'package:onion_flutter/notifier/app_model.dart';
-import 'package:onion_flutter/notifier/user_model.dart';
-import 'package:onion_flutter/routes/overlay_control_delegate.dart';
-import 'package:onion_flutter/routes/route_observer.dart';
-import 'package:onion_flutter/services/locale_service.dart';
-import 'package:onion_flutter/util/colors.dart';
-import 'package:onion_flutter/util/logs.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
@@ -20,8 +15,11 @@ import 'package:tuple/tuple.dart';
 import 'common/theme/light_theme.dart';
 import 'config/ui_config.dart';
 import 'generated/l10n.dart';
+import 'inject/injection.dart';
 import 'modules/dynamic_layout/config/app_config.dart';
+import 'notifier/app_model.dart';
 import 'notifier/recent_product_model.dart';
+import 'notifier/user_model.dart';
 
 void main() {
   printLog('[main] ===== START main.dart =======');
