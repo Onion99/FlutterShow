@@ -14,7 +14,7 @@ import '../../util/helper.dart';
 import '../base/base_screen.dart';
 import '../image/flux_image.dart';
 import '../image/image_tools.dart';
-import 'static_splashscreen.dart';
+import 'splash_screen_static.dart';
 import 'package:http/http.dart' as http;
 
 class SplashScreenTypeConstants {
