@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../model/entities/user.dart';
+import '../models/entities/user.dart';
+
 
 abstract class UserModelDelegate {
   void onLoaded(User user);

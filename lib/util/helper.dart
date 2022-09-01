@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
+import '../common/constants/general.dart';
+import 'device_helper.dart';
+
 class Layout {
   /// Product or Blog Layout styles
   static const String columns = 'columns';
@@ -18,8 +21,7 @@ class Layout {
   static const String simpleList = 'simpleList';
   static const String simpleVerticalListItems = 'simpleVerticalListItems';
   static const String largeCard = 'largeCard';
-  static const String largeCardHorizontalListItems =
-      'largeCardHorizontalListItems';
+  static const String largeCardHorizontalListItems = 'largeCardHorizontalListItems';
   static const String sliderList = 'sliderList';
   static const String sliderItem = 'sliderItem';
 
@@ -49,6 +51,15 @@ class Layout {
   static const String sliderTestimonial = 'sliderTestimonial';
   static const String instagramStory = 'instagramStory';
   static const String tiktokVideos = 'tiktokVideos';
+
+
+  static bool isDisplayDesktop(BuildContext context) {
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
+    return !isMobile &&
+        (deviceType == DeviceScreenType.desktop ||
+            (deviceType == DeviceScreenType.tablet &&
+                MediaQuery.of(context).orientation == Orientation.landscape));
+  }
 
   static double buildProductWidth({layout, screenWidth}) {
     switch (layout) {

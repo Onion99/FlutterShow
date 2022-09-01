@@ -13,40 +13,55 @@ dependencies:
   # 国际化包括了多种语言本地化接口的实现
   flutter_localizations:
     sdk: flutter
-  # 简单的基于 json 文件的 Flutter 存储: https://pub.dev/packages/localstorage
-  localstorage: 4.0.0+1
-  # 提供国际化和本地化功能，包括消息翻译、复数和性别、日期/数字格式和解析以及双向文本 : https://pub.dev/packages/intl
-  intl: 0.17.0
-  # 简化数据结构表达: https://pub.flutter-io.cn/packages/tuple/install
-  tuple: 2.0.0
-  # 状态管理: https://pub.flutter-io.cn/packages/tuple/install
-  provider: 6.0.2
-  # 依赖注入: https://blog.csdn.net/unicorn97/article/details/100769418
-  get_it: 7.2.0
-  # 获取设备区域设置数据，独立于应用区域设置: https://pub.dev/packages/devicelocale
-  devicelocale: 0.5.2
-  # 用于查找文件系统上常用的位置: https://pub.dev/packages/path_provider
-  path_provider: 2.0.10
-  # 键值对存储 : https://pub.dev/packages/shared_preferences
-  shared_preferences: ^2.0.5
-  # UI资源
+
+  # Base
+  url_launcher: 6.1.5 #用于在移动平台中启动URL的Flutter插件
+  localstorage: 4.0.0+1 #简单的基于 json 文件的 Flutter 存储: https://pub.dev/packages/localstorage
+  intl: 0.17.0 #提供国际化和本地化功能，包括消息翻译、复数和性别、日期/数字格式和解析以及双向文本 : https://pub.dev/packages/intl
+  tuple: 2.0.0 #简化数据结构表达: https://pub.flutter-io.cn/packages/tuple/install
+  provider: 6.0.2 #状态管理: https://pub.flutter-io.cn/packages/tuple/install
+  get_it: 7.2.0 #依赖注入: https://blog.csdn.net/unicorn97/article/details/100769418
+  devicelocale: 0.5.2 #获取设备区域设置数据，独立于应用区域设置: https://pub.dev/packages/devicelocale
+  path_provider: 2.0.10 #用于查找文件系统上常用的位置: https://pub.dev/packages/path_provider
+  shared_preferences: ^2.0.5 #键值对存储 : https://pub.dev/packages/shared_preferences
+
+  # UI
+  inspireui: 1.1.7
   cupertino_icons: ^1.0.2
   google_fonts: ^2.0.0
-  # image
   flutter_svg: 1.1.2
   extended_image: 6.2.1
-  # SPLASH SCREEN, ONBOARD
   lottie: 1.4.0
   rive: 0.9.1
-
   flare_flutter:
     git:
       url: https://github.com/inspireui/Flare-Flutter.git
       ref: fd4bcba22aae4c028286e453deeb78f3311e689a
       path: flare_flutter
+
+
+  # Tools
+  universal_platform: 1.0.0+1 #判断系统平台
+
+  # WEB TOOLS
+  html_unescape: 2.0.0
+  webview_flutter: 3.0.4
+  webview_flutter_web: 0.1.0+4
+  flutter_inappwebview: 5.4.3+7
+
+
+  # Responsive UI
+  responsive_builder: ^0.4.3 #Flutter之响应式UI和适配iPad方案 https://www.jianshu.com/p/4ecdbacc454d
+
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
 flutter_intl:
   enabled: true
+
+
+dev_dependencies:
+  # 单元测试集成方式
+  flutter_test:
+    sdk: flutter

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../image/flux_image.dart';
+import 'package:flutter_show/widget/image/flux_image.dart';
 
 
 class StaticSplashScreen extends StatelessWidget {
