@@ -6,6 +6,7 @@ import 'package:flutter_show/ui/base/base_screen.dart';
 import 'package:flutter_show/ui/splash/splash_screen.dart';
 
 import '../../common/config/ui_config.dart';
+import '../../common/constants/route_list.dart';
 import '../../util/logs.dart';
 
 class SplashInit extends StatefulWidget{
@@ -19,7 +20,7 @@ class SplashInit extends StatefulWidget{
 class _SplashInitState extends BaseScreen<SplashInit>{
 
   void checkToShowNextScreen() {
-    /// If the config was load complete then navigate to Dashboard
+    Navigator.of(context).pushReplacementNamed(RouteList.onBoarding);
   }
 
   @override

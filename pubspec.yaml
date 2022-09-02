@@ -31,6 +31,7 @@ dependencies:
   google_fonts: ^2.0.0
   flutter_svg: 1.1.2
   extended_image: 6.2.1
+  intro_slider: 3.0.9
   lottie: 1.4.0
   rive: 0.9.1
   flare_flutter:
@@ -52,6 +53,7 @@ dependencies:
 
   # Responsive UI
   responsive_builder: ^0.4.3 #Flutter之响应式UI和适配iPad方案 https://www.jianshu.com/p/4ecdbacc454d
+  intl_utils: ^2.7.0
 
 flutter:
   uses-material-design: true

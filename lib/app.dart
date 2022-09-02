@@ -1,5 +1,6 @@
 
-import 'package:flutter_show/routes/overlay_control_delegate.dart';
+import 'package:flutter_show/routes/route.dart';
+import 'package:flutter_show/widget/overlay/overlay_control_delegate.dart';
 import 'package:flutter_show/routes/route_observer.dart';
 import 'package:flutter_show/ui/splash/splash_init.dart';
 import 'package:flutter_show/util/logs.dart';
@@ -93,6 +94,8 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                     langCode: languageCode,
                     themeMode: themeMode,
                   ),
+                  // 路由生成
+                  onGenerateRoute: Routes.getRouteGenerate,
                   themeMode: themeMode,
                   home: const Scaffold(
                     body: SplashInit(),
