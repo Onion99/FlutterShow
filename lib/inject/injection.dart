@@ -9,9 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 GetIt injector = GetIt.instance;
 
-const String appFolder = '';
-
-
 class DependencyInjection{
   static Future<void> initInject() async {
     final sharedPreferences = await SharedPreferences.getInstance();
@@ -25,6 +22,9 @@ class DependencyInjection{
 
   }
 }
+
+
+const String appFolder = '';
 
 class FileHelper {
   static Future<String> createAppFolder() async {
@@ -47,7 +47,6 @@ class FileHelper {
 
 
 class LocalStorageKey {
-  /// FLUXBUILDER
   static const String loggedIn = '${appFolder}loggedIn';
   static const String app = '${appFolder}fstore';
   static const String notification = '${appFolder}notification';

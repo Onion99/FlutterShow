@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+/// ------------------------------------------------------------------------
+/// 一个Navigator观察者，它通知RouteAware其Route状态的更改
+/// ------------------------------------------------------------------------
 class MyRouteObserver extends RouteObserver<PageRoute<dynamic>> {
+
   final Function(String?) action;
   MyRouteObserver({required this.action});
 

@@ -12,9 +12,7 @@ class RecentModel with ChangeNotifier {
   final storage = injector<LocalStorage>();
 
   void addRecentProduct(Product? product) {
-    if (product == null) {
-      return;
-    }
+    if (product == null) return;
     var data = [];
     products.removeWhere((index) => index.id == product.id);
     if (products.length == 20) products.removeLast();

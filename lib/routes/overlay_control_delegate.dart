@@ -1,6 +1,13 @@
+
+/// ------------------------------------------------------------------------
+/// 路由代理
+/// ------------------------------------------------------------------------
 class OverlayControlDelegate {
+
   Function(String? nameRoute)? emitRoute;
+
   Function(String? nameRoute)? emitTab;
+
   static OverlayControlDelegate? _instance;
 
   factory OverlayControlDelegate() {

@@ -78,8 +78,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                   navigatorKey: App.fluxStoreNavigatorKey,
                   // 路由变化的监听
                   navigatorObservers: [
-                    MyRouteObserver(
-                        action: (screenName) => OverlayControlDelegate().emitRoute?.call(screenName)),
+                    MyRouteObserver(action: (screenName) => OverlayControlDelegate().emitRoute?.call(screenName)),
                   ],
                   // 国际化
                   localizationsDelegates: const [
