@@ -32,11 +32,23 @@ class Routes {
           settings,
           (context) => const OnBoardScreen(),
         );
-      default:
-        return _buildRoute(
-          settings,
-          (context) => const OnBoardScreen(),
-        );
+      default: return _ErrorRoute();
     }
+  }
+
+  /// ------------------------------------------------------------------------
+  /// 错误路由
+  /// ------------------------------------------------------------------------
+  static Route _ErrorRoute([String message = 'Page not founds']) {
+    return MaterialPageRoute(builder: (_) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Error'),
+        ),
+        body: Center(
+          child: Text(message),
+        ),
+      );
+    });
   }
 }

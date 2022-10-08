@@ -1,0 +1,4 @@
+
+class EventChangeLanguage {
+  const EventChangeLanguage();
+}
