@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../notifier/app_model.dart';
+import '../mixin/change_language_mixin.dart';
 
 /// ------------------------------------------------------------------------
 /// 开屏启动页
@@ -20,7 +21,7 @@ class OnBoardScreen extends StatefulWidget {
 
 }
 
-class _OnBoardScreenState extends State<OnBoardScreen> {
+class _OnBoardScreenState extends State<OnBoardScreen> with ChangeLanguage {
 
   void _onTapSignIn() async {
   }
@@ -147,7 +148,8 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 onDonePress: onTapDone,
               ),
             );
-          })
+          }),
+          iconLanguage()
         ],
       ),
     );

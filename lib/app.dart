@@ -1,5 +1,6 @@
 
 import 'package:flutter_show/routes/route.dart';
+import 'package:flutter_show/util/colors.dart';
 import 'package:flutter_show/widget/overlay/overlay_control_delegate.dart';
 import 'package:flutter_show/routes/route_observer.dart';
 import 'package:flutter_show/ui/splash/splash_init.dart';
@@ -20,7 +21,8 @@ import 'notifier/user_model.dart';
 
 class App extends StatefulWidget {
 
-  final String  languageCode;
+  String languageCode = "en";
+
 
   App(this.languageCode);
 
@@ -53,11 +55,12 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     return ChangeNotifierProvider<AppModel>.value(
       value: appModel,
       // Selector https://juejin.cn/post/6844904145774870536
-      child: Selector<AppModel,Tuple2<String,ThemeMode>>(
-        selector: (context,model) => Tuple2(model.langCode,model.themeMode),
+      child: Selector<AppModel,Tuple3<String,ThemeMode,AppConfig>>(
+        selector: (context,model) => Tuple3(model.langCode,model.themeMode, model.appConfig),
         builder: (context,value,child){
           var languageCode = value.item1;
           var themeMode = value.item2;
+          var appConfig = value.item3;
           var countryCode = '';
 
           if (languageCode.contains('_')) {
@@ -90,7 +93,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                   ],
                   supportedLocales: S.delegate.supportedLocales,
                   theme: getTheme(
-                    appConfig: null,
+                    appConfig: appConfig,
                     langCode: languageCode,
                     themeMode: themeMode,
                   ),
@@ -114,10 +117,25 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
   /// Build the App Theme
   ThemeData getTheme({
-    required AppConfig? appConfig,
+    required AppConfig appConfig,
     required String langCode,
     required ThemeMode themeMode,
   }) {
-    return buildLightTheme(langCode);
+    var theme =  buildLightTheme(langCode);
+
+    /// The app will use mainColor from env.dart,
+    /// or override it with mainColor from config JSON if found.
+    var mainColor = appConfig.settings.mainColor;
+
+
+    var colorScheme = theme.colorScheme.copyWith(
+      primary: HexColor(mainColor),
+    );
+
+    return theme.copyWith(
+      primaryColor: HexColor(mainColor),
+      colorScheme: colorScheme,
+      useMaterial3: appConfig.settings.useMaterial3,
+    );
   }
 }
