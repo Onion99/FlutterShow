@@ -28,8 +28,7 @@ void main() {
     await DependencyInjection.initInject();
 
     // 固定屏幕方向
-    unawaited(
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
+    unawaited(SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
 
     // 获取系统语言
     var lang = injector<SharedPreferences>().getString('language');

@@ -35,6 +35,7 @@ const kRedColorHeart = Color(0xFFf22742);
 
 /// color for theme
 const kLightPrimary = Color(0xfffcfcff);
+const kPrimary = Color(0xff4747ea);
 const kLightAccent = Color(0xFF546E7A);
 const kDarkAccent = Color(0xffF4F5F5);
 

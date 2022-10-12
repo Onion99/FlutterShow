@@ -13,16 +13,15 @@ import '../util/logs.dart';
 import 'dart:convert' as convert;
 
 class AppModel with ChangeNotifier{
-
-
+  /// -------- 默认语言 ------------///
   String langCode = DefaultConfig.advanceConfig['DefaultLanguage'];
-
+  /// -------- 主题样式 ------------///
   ThemeMode themeMode = ThemeMode.light;
-  late AppConfig appConfig;
-
   bool get darkTheme => themeMode == ThemeMode.dark;
-
   set darkTheme(bool value) => themeMode = value ? ThemeMode.dark : ThemeMode.light;
+  /// -------- App配置 ------------///
+  AppConfig? appConfig;
+
 
 
 

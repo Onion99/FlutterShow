@@ -60,6 +60,14 @@ flutter:
   assets:
     - assets/images/
     - assets/images/country/
+    - google_fonts/
+### Uncomment to use custom font
+#  fonts:
+#    - family: Metropolis
+#      fonts:
+#      - asset: google_fonts/Raleway-Regular.ttf
+
+
 flutter_intl:
   enabled: true
 

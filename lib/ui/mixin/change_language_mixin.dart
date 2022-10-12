@@ -73,6 +73,7 @@ mixin ChangeLanguage<T extends StatefulWidget> on State<T> {
                   child: ListView.builder(
                     key: const Key('changeLanguageList'),
                     itemCount: languages.length,
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         key:
@@ -102,13 +103,20 @@ mixin ChangeLanguage<T extends StatefulWidget> on State<T> {
                                   ),
                                 ),
                               ),
-                              RadioButton(
+                              /*RadioButton(
                                 radius: 14,
                                 isActive: languages[i]['code']
                                         .toString()
                                         .toLowerCase() ==
                                     appModel.langCode.toLowerCase(),
-                              ),
+                              ),*/
+                              Checkbox(
+                                value: languages[i]['code']
+                                    .toString()
+                                    .toLowerCase() ==
+                                    appModel.langCode.toLowerCase(),
+                                onChanged: (bool? value) {  }, //选中时的颜色
+                              )
                             ],
                           ),
                         ),

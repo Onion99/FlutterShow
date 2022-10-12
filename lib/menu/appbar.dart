@@ -6,7 +6,6 @@ import 'package:inspireui/inspireui.dart' show DeferredWidget;
 import 'package:provider/provider.dart';
 
 import '../common/tools/tools.dart';
-import '../generated/l10n.dart';
 import '../modules/dynamic_layout/config/app_config.dart';
 import '../notifier/app_model.dart';
 import '../util/colors.dart';
@@ -23,7 +22,7 @@ class FluxAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _FluxAppBarState extends State<FluxAppBar> {
-  AppBarConfig? get appBar => Provider.of<AppModel>(context, listen: false).appConfig.appBar;
+  AppBarConfig? get appBar => Provider.of<AppModel>(context, listen: false).appConfig?.appBar;
 
   // Address? currentAddress;
 
@@ -72,7 +71,7 @@ class _FluxAppBarState extends State<FluxAppBar> {
   @override
   Widget build(BuildContext context) {
     return Selector<AppModel, AppBarConfig?>(
-      selector: (context, model) => model.appConfig.appBar,
+      selector: (context, model) => model.appConfig?.appBar,
       shouldRebuild: (oldValue, newValue) => oldValue?.toJson().toString() != newValue?.toJson().toString(),
       builder: (context, value, child) {
         if (value == null || (value.items?.isEmpty ?? true)) {

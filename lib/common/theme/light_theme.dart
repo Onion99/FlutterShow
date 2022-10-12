@@ -9,7 +9,7 @@ IconThemeData customIconTheme(IconThemeData original) {
 }
 
 ThemeData buildLightTheme(String? language,
-    [String fontFamily = 'Roboto', String fontHeader = 'Raleway']) {
+    [String fontFamily = 'Raleway', String fontHeader = 'Raleway']) {
   final base = ThemeData.light().copyWith(
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
@@ -41,7 +41,7 @@ ThemeData buildLightTheme(String? language,
     iconTheme: customIconTheme(base.iconTheme),
     hintColor: Colors.black26,
     backgroundColor: Colors.white,
-    primaryColor: kLightPrimary,
+    primaryColor: kPrimary,
     scaffoldBackgroundColor: kLightBG,
     appBarTheme: const AppBarTheme(
       elevation: 0,

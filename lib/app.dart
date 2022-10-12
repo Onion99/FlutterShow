@@ -43,6 +43,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
   void initState() {
     printLog('[AppState] initState');
     appModel = AppModel(widget.languageCode);
+    appModel.loadAppConfig();
     WidgetsBinding.instance.addObserver(this);
 
     super.initState();
@@ -55,7 +56,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     return ChangeNotifierProvider<AppModel>.value(
       value: appModel,
       // Selector https://juejin.cn/post/6844904145774870536
-      child: Selector<AppModel,Tuple3<String,ThemeMode,AppConfig>>(
+      child: Selector<AppModel,Tuple3<String,ThemeMode,AppConfig?>>(
         selector: (context,model) => Tuple3(model.langCode,model.themeMode, model.appConfig),
         builder: (context,value,child){
           var languageCode = value.item1;
@@ -117,11 +118,15 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
   /// Build the App Theme
   ThemeData getTheme({
-    required AppConfig appConfig,
+    required AppConfig? appConfig,
     required String langCode,
     required ThemeMode themeMode,
   }) {
     var theme =  buildLightTheme(langCode);
+
+    if (appConfig == null) {
+      return theme;
+    }
 
     /// The app will use mainColor from env.dart,
     /// or override it with mainColor from config JSON if found.
