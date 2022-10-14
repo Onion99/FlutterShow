@@ -4,9 +4,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_show/ui/base/base_screen.dart';
 import 'package:flutter_show/ui/splash/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/config/ui_config.dart';
 import '../../common/constants/route_list.dart';
+import '../../modules/dynamic_layout/config/app_config.dart';
+import '../../notifier/app_model.dart';
 import '../../util/logs.dart';
 
 class SplashInit extends StatefulWidget{
@@ -19,8 +22,29 @@ class SplashInit extends StatefulWidget{
 
 class _SplashInitState extends BaseScreen<SplashInit>{
 
-  void checkToShowNextScreen() {
-    Navigator.of(context).pushReplacementNamed(RouteList.onBoarding);
+  late AppConfig? appConfig;
+
+  /// ------------------------------------------------------------------------
+  /// 初始化开屏数据
+  /// ------------------------------------------------------------------------
+  Future<void> loadInitData() async {
+    appConfig = await Provider.of<AppModel>(context, listen: false).loadAppConfig();
+    /// Request more Async data which is not use on home screen
+    Future.delayed(Duration.zero, () {
+      /// do some thing
+
+    });
+    printLog('[AppState] InitData Finish');
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) async {
+    await loadInitData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -39,6 +63,13 @@ class _SplashInitState extends BaseScreen<SplashInit>{
       actionDone: checkToShowNextScreen,
       duration: duration,
     );
+  }
+  
+  /// ------------------------------------------------------------------------
+  /// 跳到Slogan页面
+  /// ------------------------------------------------------------------------
+  void checkToShowNextScreen() {
+    Navigator.of(context).pushReplacementNamed(RouteList.onBoarding);
   }
 
 }

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
+import 'common/config/defalut_env.dart';
 import 'inject/injection.dart';
 
 void main() {
@@ -31,9 +32,13 @@ void main() {
     unawaited(SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
 
     // 获取系统语言
-    var lang = injector<SharedPreferences>().getString('language');
+    var lang = DefaultConfig.advanceConfig['DefaultLanguage'];
+    if(injector<SharedPreferences>().getString('language')?.isNotEmpty ?? false){
+      lang = injector<SharedPreferences>().getString('language');
+    }
 
-    if (lang?.isEmpty ?? true) {
+    // 是否自动适配手机语言
+    if (DefaultConfig.advanceConfig['AutoDetectLanguage']) {
       lang = await LocaleService().getDeviceLanguage();
     }
     // 开始初始化UI

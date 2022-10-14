@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tools{
@@ -65,6 +66,13 @@ class Tools{
       case 'center':
       default:
         return defaultValue ?? Alignment.center;
+    }
+  }
+
+
+  static void showSnackBar(ScaffoldMessengerState? state, message) {
+    if (state != null) {
+      state.showSnackBar(SnackBar(content: Text(message)));
     }
   }
 }

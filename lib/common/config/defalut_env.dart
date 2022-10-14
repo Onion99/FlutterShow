@@ -5,8 +5,17 @@ class DefaultConfig{
 
   // App Config
   static Map advanceConfig = {
-    'DefaultLanguage': 'en'
+    'DefaultLanguage'   : 'en',
+    'AutoDetectLanguage': false,
+    /// Disable inAppWebView to use webview_flutter
+    /// so webview can navigate to external app.
+    /// Useful for webview checkout which need to handle payment in another app.
+    'inAppWebView': false,
+    'AlwaysClearWebViewCache': false,
+    'WebViewScript': '',
   };
+
+  static Map defaultDrawer = {};
 
   // Splash Config
   static Map splashScreen = {
@@ -88,4 +97,8 @@ class DefaultConfig{
   ];
 
   static Map? loadingIcon;
+
+  // Web
+  static bool alwaysClearWebViewCache = false;
+
 }

@@ -1,3 +1,12 @@
+import 'package:flutter_show/modules/dynamic_layout/config/tab_bar_config.dart';
+import 'package:flutter_show/modules/dynamic_layout/config/tab_bar_floating_config.dart';
+import 'package:flutter_show/modules/dynamic_layout/config/tab_bar_indicator_config.dart';
+
+var DefaultTabBar = TabBarConfig(
+  tabBarIndicator: TabBarIndicatorConfig(),
+  tabBarFloating: TabBarFloatingConfig(),
+);
+
 class AppSetting {
   late String mainColor;
   late String fontFamily;
@@ -9,6 +18,7 @@ class AppSetting {
   late String? productDetail;
   late String? blogDetail;
   late bool? useMaterial3;
+  TabBarConfig tabBarConfig = DefaultTabBar;
 
   AppSetting({
     this.mainColor = '',

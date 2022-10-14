@@ -13,6 +13,9 @@ abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
     );
   }
 
+  /// ------------------------------------------------------------------------
+  /// 首屏渲染完成
+  /// ------------------------------------------------------------------------
   void afterFirstLayout(BuildContext context) {}
 
   /// Get size screen

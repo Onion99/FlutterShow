@@ -21,8 +21,7 @@ import 'notifier/user_model.dart';
 
 class App extends StatefulWidget {
 
-  String languageCode = "en";
-
+  final String languageCode;
 
   App(this.languageCode);
 
@@ -43,11 +42,17 @@ class _AppState extends State<App> with WidgetsBindingObserver{
   void initState() {
     printLog('[AppState] initState');
     appModel = AppModel(widget.languageCode);
-    appModel.loadAppConfig();
     WidgetsBinding.instance.addObserver(this);
 
     super.initState();
   }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
