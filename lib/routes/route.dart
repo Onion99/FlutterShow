@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inspireui/extensions.dart';
 
 import '../common/constants/route_list.dart';
+import '../menu/maintab.dart';
 import '../ui/onboard/onboard_screen.dart';
 import '../util/logs.dart';
 
@@ -27,10 +28,13 @@ class Routes {
     printLog('[🧬Builder RouteGenerate] ${routingData.route}');
 
     switch (routingData.route) {
+      case RouteList.dashboard:
+        return _buildRoute(
+          settings, (context) => const MainTabs(),
+        );
       case RouteList.onBoarding:
         return _buildRoute(
-          settings,
-          (context) => const OnBoardScreen(),
+          settings, (context) => const OnBoardScreen(),
         );
       default: return _ErrorRoute();
     }

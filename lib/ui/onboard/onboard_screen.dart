@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_show/common/config/defalut_env.dart';
+import 'package:flutter_show/common/constants/route_list.dart';
 import 'package:flutter_show/widget/image/flux_image.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:provider/provider.dart';
@@ -111,6 +112,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> with ChangeLanguage {
 
 
   void onTapDone() async {
+    await Navigator.pushReplacementNamed(context, RouteList.dashboard);
   }
 
 

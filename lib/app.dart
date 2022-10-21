@@ -20,7 +20,7 @@ import 'notifier/user_model.dart';
 
 
 class App extends StatefulWidget {
-
+  /// -------- eg:en ------------///
   final String languageCode;
 
   App(this.languageCode);
@@ -43,7 +43,6 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     printLog('[AppState] initState');
     appModel = AppModel(widget.languageCode);
     WidgetsBinding.instance.addObserver(this);
-
     super.initState();
   }
 
@@ -109,6 +108,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                   home: const Scaffold(
                     body: SplashInit(),
                   ),
+                  //所以一些toast库等需要全局context的三方库，会用builder将自己加到widget tree中。MaterialApp的builder属性提供的方法，只会在MaterialApp构建时被调用一回
                   builder: (_,widget) => MainLayout(widget: widget!),
                 ),
               )
@@ -122,11 +122,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
 
   /// Build the App Theme
-  ThemeData getTheme({
-    required AppConfig? appConfig,
-    required String langCode,
-    required ThemeMode themeMode,
-  }) {
+  ThemeData getTheme({required AppConfig? appConfig, required String langCode, required ThemeMode themeMode,}) {
     var theme =  buildLightTheme(langCode);
 
     if (appConfig == null) {
@@ -136,8 +132,6 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     /// The app will use mainColor from env.dart,
     /// or override it with mainColor from config JSON if found.
     var mainColor = appConfig.settings.mainColor;
-
-
     var colorScheme = theme.colorScheme.copyWith(
       primary: HexColor(mainColor),
     );

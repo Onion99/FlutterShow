@@ -1,4 +1,5 @@
 
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,12 +7,19 @@ import 'package:flutter_show/common/constants/general.dart';
 import 'package:flutter_show/generated/l10n.dart';
 import 'package:flutter_show/menu/side_menu.dart';
 import 'package:flutter_show/menu/sidebar.dart';
+import 'package:flutter_show/modules/dynamic_layout/config/app_config.dart';
 import 'package:flutter_show/modules/dynamic_layout/config/app_setting.dart';
 import 'package:flutter_show/notifier/app_model.dart';
+import 'package:flutter_show/ui/base/base_screen.dart';
 import 'package:flutter_show/util/logs.dart';
 import 'package:flutter_show/widget/main_layout/layout_left_menu.dart';
-import 'package:flutter_show/widget/tabbar/tabbar_custom.dart';
 import 'package:provider/provider.dart';
+import '../routes/route.dart';
+import '../routes/route_observer.dart';
+import '../util/helper.dart';
+import '../widget/overlay/overlay_control_delegate.dart';
+import '../widget/tabbar/tabbar_custom.dart';
+import 'maintab_delegate.dart';
 
 class MainTabs extends StatefulWidget {
   const MainTabs({Key? key}) : super(key: key);
@@ -20,11 +28,18 @@ class MainTabs extends StatefulWidget {
   MainTabsState createState() => MainTabsState();
 }
 
-class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
+class MainTabsState extends BaseScreen<MainTabs> with TickerProviderStateMixin,WidgetsBindingObserver {
 
   final List<Widget> _tabView = [];
+  Map saveIndexTab = {};
+  Map<String, String?> childTabName = {};
+  var isInitialized = false;
+
   AppSetting get appSetting => Provider.of<AppModel>(context, listen: false).appConfig!.settings;
   final navigators = <int, GlobalKey<NavigatorState>>{};
+
+  List<TabBarMenuConfig> get tabData => Provider.of<AppModel>(context, listen: false).appConfig!.tabBar;
+
 
 
   /// TabBar variable
@@ -53,8 +68,18 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
   /// ------------------------------------------------------------------------
   @override
   void dispose() {
+    if (isInitialized) {
+      tabController.dispose();
+    }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+
+  @override
+  Future<void> afterFirstLayout(BuildContext context) async {
+    _initTabDelegate();
+    _initTabData(context);
   }
 
 
@@ -64,9 +89,7 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
     var appConfig = Provider.of<AppModel>(context, listen: false).appConfig;
     // empty page
     if (_tabView.isEmpty || appConfig == null) {
-      return Container(
-        color: Colors.white,
-      );
+      return Container(color: Colors.white);
     }
 
     final media = MediaQuery.of(context);
@@ -81,7 +104,8 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
 
     return SideMenu(
       backgroundColor: showFloating ? null : Theme.of(context).backgroundColor,
-      bottomNavigationBar: null,
+      bottomNavigationBar: isTabBarEnabled ? (showFloating ? BottomAppBar(shape: isClip ? const CircularNotchedRectangle() : null,
+        child: tabBarMenu(),) : tabBarMenu()) : null,
       tabBarOnTop: appConfig.settings.tabBarConfig.enableOnTop,
       floatingActionButtonLocation: floatingActionButtonLocation,
       floatingActionButton: null,
@@ -109,8 +133,7 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
           child: LayoutLeftMenu(
             menu:
             (appConfig.drawer?.enable ?? true) ? const SideBarMenu() : null,
-            content: MediaQuery(
-              data: false ? media.copyWith(
+            content: MediaQuery(data: Layout.isDisplayDesktop(context) ? media.copyWith(
                   size: Size(
                     media.size.width,
                     media.size.height,
@@ -145,18 +168,6 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
       ),
     );
   }
-
-  // /// return the tabBar widget
-  // Widget tabBarMenu() {
-  //   return TabBarCustom(
-  //     tabData: tabData,
-  //     tabController: tabController,
-  //     config: appSetting,
-  //     shouldHideTabBar: false,
-  //     totalCart: 1,
-  //     onTap: (int ) {  },
-  //   );
-  // }
 
   /// Check pop navigator on the Current tab, and show Confirm Exit App
   Future<bool> _handleWillPopScopeRoot() async {
@@ -200,5 +211,138 @@ class MainTabsState extends State<MainTabs> with WidgetsBindingObserver {
         ),
       );
     }
+  }
+}
+
+
+extension TabBarMenuExtention on MainTabsState {
+
+  /// init Tab Delegate to use for SmartChat & Ads feature
+  void _initTabDelegate() {
+    var tabDelegate = MainTabControlDelegate.getInstance();
+    tabDelegate.changeTab = _onChangeTab;
+    tabDelegate.tabKey = () => navigators[tabController.index];
+    tabDelegate.currentTabName = _getCurrentTabName;
+    tabDelegate.tabAnimateTo = (int index) {
+      if (index < tabController.length) {
+        tabController.animateTo(index);
+      }
+    };
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// on change tabBar name
+  void _onChangeTab(String? nameTab, {bool allowPush = true}) {
+    if (saveIndexTab[nameTab] != null) {
+      tabController.animateTo(saveIndexTab[nameTab]);
+      _emitChildTabName();
+    } else if (allowPush) {
+      //FluxNavigate.pushNamed(nameTab.toString(), forceRootNavigator: true);
+    }
+  }
+
+  void _emitChildTabName() {
+    final tabName = _getCurrentTabName();
+    OverlayControlDelegate().emitTab?.call(childTabName[tabName]);
+  }
+
+  String _getCurrentTabName() {
+    if (saveIndexTab.isEmpty) {
+      return '';
+    }
+    return saveIndexTab.entries
+        .firstWhereOrNull((element) => element.value == tabController.index)
+        ?.key ?? '';
+  }
+
+  /// init the tabView data and tabController
+  void _initTabData(context) async {
+    var appModel = Provider.of<AppModel>(context, listen: false);
+    var tabData = appModel.appConfig!.tabBar;
+    var enableOnTop = appModel.appConfig?.settings.tabBarConfig.enableOnTop ??
+        false;
+    for (var i = 0; i < tabData.length; i++) {
+      var dataOfTab = tabData[i];
+      saveIndexTab[dataOfTab.layout] = i;
+      navigators[i] = GlobalKey<NavigatorState>();
+      final initialRoute = dataOfTab.layout;
+      if (enableOnTop) {
+        _tabView.add(
+          MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              padding: EdgeInsets.zero,
+              viewPadding: EdgeInsets.zero,
+            ),
+            child: tabViewItem(
+              key: navigators[i],
+              initialRoute: initialRoute,
+              args: dataOfTab,
+            ),
+          ),
+        );
+      } else {
+        _tabView.add(
+          tabViewItem(
+            key: navigators[i],
+            initialRoute: initialRoute,
+            args: dataOfTab,
+          ),
+        );
+      }
+    }
+    // ignore: invalid_use_of_protected_member
+    setState(() {
+      tabController = TabController(length: _tabView.length, vsync: this);
+    });
+
+    if (MainTabControlDelegate
+        .getInstance()
+        .index != null) {
+      tabController.animateTo(MainTabControlDelegate
+          .getInstance()
+          .index!);
+    } else {
+      MainTabControlDelegate
+          .getInstance()
+          .index = 0;
+    }
+    isInitialized = true;
+  }
+
+
+  Navigator tabViewItem({key, initialRoute, args}) {
+    return Navigator(
+      key: key,
+      initialRoute: initialRoute,
+      observers: [
+        MyRouteObserver(
+          action: (screenName) {
+            childTabName[initialRoute!] = screenName;
+            OverlayControlDelegate().emitTab?.call(screenName);
+          },
+        ),
+      ],
+      onGenerateRoute: (RouteSettings settings) {
+        if (settings.name == initialRoute) {
+          return Routes.getRouteGenerate(RouteSettings(
+            name: initialRoute,
+            arguments: args,
+          ));
+        }
+        return Routes.getRouteGenerate(settings);
+      },
+    );
+  }
+
+  /// return the tabBar widget
+  Widget tabBarMenu() {
+    return TabBarCustom(
+      onTap: (value) {},
+      tabData: tabData,
+      tabController: tabController,
+      config: appSetting,
+      shouldHideTabBar: true,
+      totalCart: 5,
+    );
   }
 }

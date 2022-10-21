@@ -24,6 +24,7 @@ dependencies:
   devicelocale: 0.5.2 #获取设备区域设置数据，独立于应用区域设置: https://pub.dev/packages/devicelocale
   path_provider: 2.0.10 #用于查找文件系统上常用的位置: https://pub.dev/packages/path_provider
   shared_preferences: ^2.0.5 #键值对存储 : https://pub.dev/packages/shared_preferences
+  collection: 1.16.0 # 集合操作扩展库
 
 
   # PERMISSION
