@@ -78,6 +78,9 @@ dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - lib/config/
+    - lib/config/states/
+    - lib/config/stories/
     - assets/images/
     - assets/images/country/
     - google_fonts/

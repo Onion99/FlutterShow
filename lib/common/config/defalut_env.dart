@@ -1,7 +1,7 @@
 class DefaultConfig{
 
 
-  static String appConfig = '';
+  static String appConfig = 'lib/config/config_en.json';
 
   // App Config
   static Map advanceConfig = {
