@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_show/ui/settings/settings_screen.dart';
 import 'package:inspireui/extensions.dart';
 
 import '../common/constants/route_list.dart';
@@ -11,7 +12,9 @@ class Routes {
   /// ------------------------------------------------------------------------
   /// 生成跳转路由
   /// ------------------------------------------------------------------------
-  static MaterialPageRoute _buildRoute(RouteSettings settings, WidgetBuilder builder, {bool fullscreenDialog = false}) {
+  static MaterialPageRoute _buildRoute(
+      RouteSettings settings, WidgetBuilder builder,
+      {bool fullscreenDialog = false}) {
     return MaterialPageRoute(
       settings: settings,
       builder: builder,
@@ -28,15 +31,27 @@ class Routes {
     printLog('[🧬Builder RouteGenerate] ${routingData.route}');
 
     switch (routingData.route) {
+      case RouteList.home:
+      case RouteList.category:
+      case RouteList.search:
+      case RouteList.cart:
+      case RouteList.profile:
+        return _buildRoute(
+          settings,
+          (context) => const SettingScreen(),
+        );
       case RouteList.dashboard:
         return _buildRoute(
-          settings, (context) => const MainTabs(),
+          settings,
+          (context) => const MainTabs(),
         );
       case RouteList.onBoarding:
         return _buildRoute(
-          settings, (context) => const OnBoardScreen(),
+          settings,
+          (context) => const OnBoardScreen(),
         );
-      default: return _ErrorRoute();
+      default:
+        return _ErrorRoute();
     }
   }
 

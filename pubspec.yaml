@@ -83,6 +83,7 @@ flutter:
     - lib/config/states/
     - lib/config/stories/
     - assets/images/
+    - assets/icons/tabs/
     - assets/images/country/
     - google_fonts/
 ### Uncomment to use custom font

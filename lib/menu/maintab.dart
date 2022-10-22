@@ -87,6 +87,11 @@ class MainTabsState extends BaseScreen<MainTabs> with TickerProviderStateMixin,W
   Widget build(BuildContext context) {
     printLog('[TabBar] ============== tabbar.dart ==============');
     var appConfig = Provider.of<AppModel>(context, listen: false).appConfig;
+
+
+    _initTabDelegate();
+    _initTabData(context);
+
     // empty page
     if (_tabView.isEmpty || appConfig == null) {
       return Container(color: Colors.white);
@@ -295,16 +300,10 @@ extension TabBarMenuExtention on MainTabsState {
       tabController = TabController(length: _tabView.length, vsync: this);
     });
 
-    if (MainTabControlDelegate
-        .getInstance()
-        .index != null) {
-      tabController.animateTo(MainTabControlDelegate
-          .getInstance()
-          .index!);
+    if (MainTabControlDelegate.getInstance().index != null) {
+      tabController.animateTo(MainTabControlDelegate.getInstance().index!);
     } else {
-      MainTabControlDelegate
-          .getInstance()
-          .index = 0;
+      MainTabControlDelegate.getInstance().index = 0;
     }
     isInitialized = true;
   }
