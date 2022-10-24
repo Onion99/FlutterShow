@@ -61,6 +61,14 @@ class Layout {
                 MediaQuery.of(context).orientation == Orientation.landscape));
   }
 
+  static bool isDisplayTablet(BuildContext context) {
+    final deviceType = getDeviceType(MediaQuery.of(context).size);
+    return isMobile &&
+        ((deviceType == DeviceScreenType.desktop ||
+            deviceType == DeviceScreenType.tablet) &&
+            MediaQuery.of(context).orientation == Orientation.landscape);
+  }
+
   static double buildProductWidth({layout, screenWidth}) {
     switch (layout) {
       case twoColumn:
@@ -181,11 +189,5 @@ class Helper {
                 MediaQuery.of(context).orientation == Orientation.landscape));
   }
 
-  static bool isDisplayTablet(BuildContext context) {
-    final deviceType = getDeviceType(MediaQuery.of(context).size);
-    return isMobile &&
-        ((deviceType == DeviceScreenType.desktop ||
-            deviceType == DeviceScreenType.tablet) &&
-            MediaQuery.of(context).orientation == Orientation.landscape);
-  }
+
 }

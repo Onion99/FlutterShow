@@ -1,12 +1,10 @@
 
 
 
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_show/generated/l10n.dart';
 
 class SettingScreen extends StatefulWidget {
-
-
 
   @override
   SettingScreenState createState() {
@@ -32,7 +30,7 @@ class SettingScreenState extends State<SettingScreen>{
                   children: [
                     const SizedBox(height: 30),
                     Text(
-                      S.of(context).generalSetting,
+                      Random.secure().nextDouble().toString(),
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w600),
                     ),

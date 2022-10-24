@@ -41,6 +41,13 @@ class MainTabsState extends BaseScreen<MainTabs> with TickerProviderStateMixin,W
   List<TabBarMenuConfig> get tabData => Provider.of<AppModel>(context, listen: false).appConfig!.tabBar;
 
 
+  bool get isDesktopDisplay => Layout.isDisplayDesktop(context);
+  /// -------- 是否展示底部Tab栏 ------------///
+  bool isShowCustomDrawer = true;
+  bool get shouldHideTabBar => isDesktopDisplay || (isShowCustomDrawer && Layout.isDisplayDesktop(context));
+
+
+
 
   /// TabBar variable
   late TabController tabController;
@@ -87,10 +94,6 @@ class MainTabsState extends BaseScreen<MainTabs> with TickerProviderStateMixin,W
   Widget build(BuildContext context) {
     printLog('[TabBar] ============== tabbar.dart ==============');
     var appConfig = Provider.of<AppModel>(context, listen: false).appConfig;
-
-
-    _initTabDelegate();
-    _initTabData(context);
 
     // empty page
     if (_tabView.isEmpty || appConfig == null) {
@@ -297,7 +300,7 @@ extension TabBarMenuExtention on MainTabsState {
     }
     // ignore: invalid_use_of_protected_member
     setState(() {
-      tabController = TabController(length: _tabView.length, vsync: this);
+      tabController = TabController(length: tabData.length, vsync: this);
     });
 
     if (MainTabControlDelegate.getInstance().index != null) {
@@ -340,7 +343,7 @@ extension TabBarMenuExtention on MainTabsState {
       tabData: tabData,
       tabController: tabController,
       config: appSetting,
-      shouldHideTabBar: true,
+      shouldHideTabBar: shouldHideTabBar,
       totalCart: 5,
     );
   }
