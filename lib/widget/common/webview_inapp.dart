@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_show/common/config/defalut_env.dart';
-import 'package:flutter_show/common/constants/general.dart';
+import 'package:flutter_show/common/constants.dart';
 import 'package:flutter_show/extensions/string_ext.dart';
 import 'package:flutter_show/util/logs.dart';
 import 'package:inspireui/widgets/platform_error/platform_error.dart';

@@ -13,6 +13,15 @@ class DefaultConfig{
     'inAppWebView': false,
     'AlwaysClearWebViewCache': false,
     'WebViewScript': '',
+    /// set isCaching to true if you have upload the config file to mstore-api
+    /// set kIsResizeImage to true if you have finished running Re-generate image plugin
+    /// ref: https://support.inspireui.com/help-center/articles/3/8/19/app-performance
+    'isCaching': false,
+    'kIsResizeImage': false,
+    'httpCache': true,
+    /// if the woo commerce website supports multi languages
+    /// set false if the website only have one language
+    'isMultiLanguages': false,
   };
 
   static Map defaultDrawer = {};

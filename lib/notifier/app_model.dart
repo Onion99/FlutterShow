@@ -84,4 +84,16 @@ class AppModel with ChangeNotifier{
     }
   }
 
+
+  Future<void> updateTheme(bool theme) async {
+    try {
+      var prefs = injector<SharedPreferences>();
+      darkTheme = theme;
+      await prefs.setBool('darkTheme', theme);
+      notifyListeners();
+    } catch (error) {
+      printLog('[updateTheme] error: ${error.toString()}');
+    }
+  }
+
 }

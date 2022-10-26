@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
-
-import '../common/constants/general.dart';
+import 'package:flutter_show/common/constants.dart';
 import 'device_helper.dart';
 
 class Layout {
