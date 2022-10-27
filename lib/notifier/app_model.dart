@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_show/common/constants.dart';
 import 'package:inspireui/extensions.dart';
 import 'package:inspireui/utils/event_bus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/config/defalut_env.dart';
-import '../common/constants/event_bus.dart';
 import '../inject/injection.dart';
 import '../modules/dynamic_layout/config/app_config.dart';
 import '../util/logs.dart';

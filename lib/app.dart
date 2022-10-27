@@ -23,11 +23,9 @@ import 'notifier/user_model.dart';
 class App extends StatefulWidget {
   /// -------- eg:en ------------///
   final String languageCode;
-
   App(this.languageCode);
 
-  static final GlobalKey<NavigatorState> fluxStoreNavigatorKey = GlobalKey();
-
+  static final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey();
 
   @override
   State<StatefulWidget> createState() => _AppState();
@@ -85,12 +83,12 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                   debugShowCheckedModeBanner: false,
                   locale: Locale(languageCode, countryCode),
                   // 定义全局 navigatorKey (context)
-                  navigatorKey: App.fluxStoreNavigatorKey,
+                  navigatorKey: App.appNavigatorKey,
                   // 路由变化的监听
                   navigatorObservers: [
                     MyRouteObserver(action: (screenName) => OverlayControlDelegate().emitRoute?.call(screenName)),
                   ],
-                  // 国际化
+                  // 国际化 I18N
                   localizationsDelegates: const [
                     S.delegate,
                     GlobalMaterialLocalizations.delegate,
@@ -98,6 +96,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                     DefaultCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: S.delegate.supportedLocales,
+                  // 主题
                   theme: getTheme(
                     appConfig: appConfig,
                     langCode: languageCode,
@@ -106,6 +105,7 @@ class _AppState extends State<App> with WidgetsBindingObserver{
                   // 路由生成
                   onGenerateRoute: Routes.getRouteGenerate,
                   themeMode: themeMode,
+                  // 页面
                   home: const Scaffold(
                     body: SplashInit(),
                   ),
@@ -122,7 +122,9 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
 
 
+  /// ------------------------------------------------------------------------
   /// Build the App Theme
+  /// ------------------------------------------------------------------------
   ThemeData getTheme({required AppConfig? appConfig, required String langCode, required ThemeMode themeMode,}) {
 
     var theme =  buildLightTheme(langCode);
@@ -132,7 +134,6 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     }
     /// 判断是不是黑暗模式
     var isDarkTheme = themeMode == ThemeMode.dark;
-
     if (isDarkTheme) {
       theme = buildDarkTheme(langCode);
     } else {
@@ -140,13 +141,11 @@ class _AppState extends State<App> with WidgetsBindingObserver{
     }
 
 
-    /// The app will use mainColor from env.dart,
-    /// or override it with mainColor from config JSON if found.
+    /// 主题色配置
     var mainColor = appConfig.settings.mainColor;
     var colorScheme = theme.colorScheme.copyWith(
       primary: HexColor(mainColor),
     );
-
     return theme.copyWith(
       primaryColor: HexColor(mainColor),
       colorScheme: colorScheme,

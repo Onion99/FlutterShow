@@ -2,12 +2,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_show/common/constants.dart';
 import 'package:flutter_show/ui/base/base_screen.dart';
 import 'package:flutter_show/ui/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/config/ui_config.dart';
-import '../../common/constants/route_list.dart';
 import '../../modules/dynamic_layout/config/app_config.dart';
 import '../../notifier/app_model.dart';
 import '../../util/logs.dart';

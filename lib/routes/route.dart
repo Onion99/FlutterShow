@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_show/common/constants.dart';
 import 'package:flutter_show/ui/settings/settings_screen.dart';
 import 'package:inspireui/extensions.dart';
-
-import '../common/constants/route_list.dart';
 import '../menu/maintab.dart';
 import '../ui/onboard/onboard_screen.dart';
 import '../util/logs.dart';

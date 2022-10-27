@@ -11,11 +11,10 @@ const _desktopBreakpointWstH = 1024.0; // Width is smaller than Height
 const _desktopBreakpointWgtH = 700.0; // Width is greater than Height
 
 extension BuildContextExt2 on BuildContext {
+
   bool get isRtl => Directionality.of(this) == TextDirection.rtl;
 
-  bool get isBigScreen {
-    return query.size.width >= 768;
-  }
+  bool get isBigScreen => query.size.width >= 768;
 
   DisplayType get displayType {
     final size = query.size;

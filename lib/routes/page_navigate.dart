@@ -5,7 +5,7 @@ import '../app.dart';
 
 /// Push screen on TabBar
 class PageNavigate {
-  static NavigatorState get _rootNavigator => Navigator.of(App.fluxStoreNavigatorKey.currentContext!);
+  static NavigatorState get _rootNavigator => Navigator.of(App.appNavigatorKey.currentContext!);
 
   static NavigatorState get _tabNavigator => Navigator.of(MainTabControlDelegate.getInstance().tabKey()!.currentContext!);
 

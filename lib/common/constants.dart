@@ -8,3 +8,5 @@ import 'package:universal_platform/universal_platform.dart';
 
 part 'constants/images.dart';
 part 'constants/general.dart';
+part 'constants/event_bus.dart';
+part 'constants/route_list.dart';

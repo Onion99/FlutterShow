@@ -13,7 +13,9 @@ class SizeConfig{
   static late double scaleFactorWidth;
   static late double scaleFactorHeight;
 
-
+  /// ------------------------------------------------------------------------
+  /// 初始化屏幕参数
+  /// ------------------------------------------------------------------------
   void init(BuildContext context){
     _mediaQueryData = MediaQuery.of(context);
     screenWidth =  _mediaQueryData.size.width;
@@ -87,7 +89,6 @@ class Shape{
   }
 
   static dynamic circularTop(double radius,{ShapeTypeFor shapeTypeFor=ShapeTypeFor.container}){
-
     BorderRadius borderRadius = BorderRadius.only(topLeft: Radius.circular(SizeConfig.getScaledSizeHeight(radius)),topRight: Radius.circular(SizeConfig.getScaledSizeHeight(radius)));
     switch(shapeTypeFor) {
       case ShapeTypeFor.container:

@@ -10,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 GetIt injector = GetIt.instance;
 
 class DependencyInjection{
+  /// ------------------------------------------------------------------------
+  /// 初始化依赖注入
+  /// ------------------------------------------------------------------------
   static Future<void> initInject() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     injector.registerSingleton<SharedPreferences>(sharedPreferences);
