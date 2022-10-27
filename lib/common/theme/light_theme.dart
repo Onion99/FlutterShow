@@ -8,8 +8,7 @@ IconThemeData customIconTheme(IconThemeData original) {
   return original.copyWith(color: kGrey900);
 }
 
-ThemeData buildLightTheme(String? language,
-    [String fontFamily = 'Raleway', String fontHeader = 'Raleway']) {
+ThemeData buildLightTheme(String? language, [String fontFamily = 'Raleway', String fontHeader = 'Raleway']) {
   final base = ThemeData.light().copyWith(
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,

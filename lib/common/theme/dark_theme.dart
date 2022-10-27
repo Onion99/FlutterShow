@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'fonts.dart';
 
-ThemeData buildDarkTheme(String? language, [fontFamily, fontHeader]) {
+ThemeData buildDarkTheme(String? language, [String fontFamily = 'Raleway', String fontHeader = 'Raleway']) {
   final base = ThemeData.dark();
   return base.copyWith(
     snackBarTheme: SnackBarThemeData(

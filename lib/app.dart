@@ -12,6 +12,7 @@ import 'package:flutter_show/widget/main_layout/main_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import 'common/theme/dark_theme.dart';
 import 'common/theme/light_theme.dart';
 import 'generated/l10n.dart';
 import 'modules/dynamic_layout/config/app_config.dart';
@@ -123,11 +124,21 @@ class _AppState extends State<App> with WidgetsBindingObserver{
 
   /// Build the App Theme
   ThemeData getTheme({required AppConfig? appConfig, required String langCode, required ThemeMode themeMode,}) {
-    var theme =  buildLightTheme(langCode);
 
+    var theme =  buildLightTheme(langCode);
+    /// 首次加载白色主题
     if (appConfig == null) {
       return theme;
     }
+    /// 判断是不是黑暗模式
+    var isDarkTheme = themeMode == ThemeMode.dark;
+
+    if (isDarkTheme) {
+      theme = buildDarkTheme(langCode);
+    } else {
+      theme = buildLightTheme(langCode);
+    }
+
 
     /// The app will use mainColor from env.dart,
     /// or override it with mainColor from config JSON if found.
